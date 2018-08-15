@@ -5,7 +5,7 @@
 <details>
   <summary><b>Split String</b></summary><p>
   
-```
+```c++
 #include <string>
 #include <functional>
 #include <algorithm>
