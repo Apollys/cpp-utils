@@ -1,6 +1,6 @@
 # Code Spoiler in Github Markdown
 
-&nbsp;
+<br/>
 
 Use this code:
 
