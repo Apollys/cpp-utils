@@ -3,12 +3,37 @@
 <br/>
 
 <details>
+  <summary><b>Vector to String</b></summary><p>
+  
+```c++
+#include <vector>
+#include <string>
+#include <sstream> // std::ostringstream
+
+std::string vtos(std::vector<std::string> v) {
+  std::ostringstream oss;
+  oss << "[ ";
+  for (unsigned int i = 0; i + 1 < v.size(); i++) {
+    oss << "\"" << v[i] << "\", ";
+  }
+  if (v.size() > 0) {
+    oss << "\"" << v[v.size() - 1] << "\" ";
+  }
+  oss << "]";
+  return oss.str();
+}
+```
+</p></details><br/>
+
+<br/>
+
+<details>
   <summary><b>Split String</b></summary><p>
   
 ```c++
 #include <string>
-#include <functional>
-#include <algorithm>
+#include <algorithm> // std::unique
+#include <functional> // std::function
 
 void split_string(std::string input_string, const char delim,
                   std::vector<std::string> &results, bool retain_empty = false) {
