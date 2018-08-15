@@ -63,3 +63,27 @@ void split_string(std::string input_string, const char delim,
 }
 ```
 </p></details><br/>
+
+<br/>
+
+<details>
+  <summary><b>Join String</b></summary><p>
+  
+```c++
+#include <vector>
+#include <string>
+
+std::string join_strings(const std::vector<std::string> &input_vector, const std::string delim) {
+  std::string result = "";
+  for (unsigned int i = 0; i + 1 < input_vector.size(); i++) {
+    result += input_vector[i] + delim;
+  }
+  if (input_vector.size() > 0) {
+    result += input_vector[input_vector.size() - 1];
+  }
+  return result;
+}
+```
+</p></details><br/>
+
+
