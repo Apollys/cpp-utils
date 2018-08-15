@@ -1,5 +1,7 @@
 # Code Spoiler in Github Markdown
 
+&nbsp;
+
 Use this code:
 
 ````
