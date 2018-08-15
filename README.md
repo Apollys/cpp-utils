@@ -2,10 +2,8 @@
 
 <br/>
 
-### Split String
-
 <details>
-  <summary>split_string</summary><p>
+  <summary>[b]Split String[/b]</summary><p>
   
 ```
 #include <string>
