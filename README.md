@@ -3,7 +3,7 @@
 <br/>
 
 <details>
-  <summary><b>Split String></b></summary><p>
+  <summary><b>Split String</b></summary><p>
   
 ```
 #include <string>
