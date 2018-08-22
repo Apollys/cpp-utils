@@ -6,6 +6,10 @@
   <summary><b>Vector to String</b></summary><p>
   
 ```c++
+#include <vector>
+#include <string>
+#include <sstream> // std::ostringstream
+
 // General version
 template <typename T>
 std::string vtos(std::vector<T> v) {
