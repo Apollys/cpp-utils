@@ -21,7 +21,7 @@ std::string vtos(std::vector<T> v) {
   return oss.str();
 }
 
-// Add quotes around strings (using template specialization)
+// Add quotes around strings (template specialization)
 template <>
 std::string vtos<std::string>(std::vector<std::string> v) {
   std::ostringstream oss;
@@ -34,7 +34,6 @@ std::string vtos<std::string>(std::vector<std::string> v) {
   }
   oss << "]";
   return oss.str();
-}
 }
 ```
 </p></details><br/>
