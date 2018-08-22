@@ -6,11 +6,24 @@
   <summary><b>Vector to String</b></summary><p>
   
 ```c++
-#include <vector>
-#include <string>
-#include <sstream> // std::ostringstream
+// General version
+template <typename T>
+std::string vtos(std::vector<T> v) {
+  std::ostringstream oss;
+  oss << "[ ";
+  for (unsigned int i = 0; i + 1 < v.size(); i++) {
+    oss << v[i] << ", ";
+  }
+  if (v.size() > 0) {
+    oss << v[v.size() - 1] << " ";
+  }
+  oss << "]";
+  return oss.str();
+}
 
-std::string vtos(std::vector<std::string> v) {
+// Add quotes around strings (using template specialization)
+template <>
+std::string vtos<std::string>(std::vector<std::string> v) {
   std::ostringstream oss;
   oss << "[ ";
   for (unsigned int i = 0; i + 1 < v.size(); i++) {
@@ -21,6 +34,7 @@ std::string vtos(std::vector<std::string> v) {
   }
   oss << "]";
   return oss.str();
+}
 }
 ```
 </p></details><br/>
