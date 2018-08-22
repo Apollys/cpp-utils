@@ -45,6 +45,31 @@ std::string vtos<std::string>(std::vector<std::string> v) {
 <br/>
 
 <details>
+  <summary><b>Unordered Map to String</b></summary><p>
+  
+```c++
+#include <unordered_map>
+#include <string>
+#include <sstream> // std::ostringstream
+
+template <typename K, typename V>
+std::string mtos(std::unordered_map<K, V> map) {
+  std::ostringstream oss;
+  oss << "{ ";
+  for (std::pair<K, V> item : map) {
+    oss << item.first << ": " << item.second << ", ";
+  }
+  oss << "}";
+  std::string s = oss.str();
+  if (!map.empty()) s.erase(s.length() - 3, 1);
+  return s;
+}
+```
+</p></details><br/>
+
+<br/>
+
+<details>
   <summary><b>Split String</b></summary><p>
   
 ```c++
