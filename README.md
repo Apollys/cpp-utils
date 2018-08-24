@@ -185,3 +185,34 @@ class Timer {
 </p></details><br/>
 
 <br/>
+
+<details>
+  <summary><b>Human-Readable Number Formatting</b></summary><p>
+  
+```c++
+#include <string>
+#include <cstdlib>
+
+std::string format_number(int num) {
+	// First multiply by 10 to get one decimal place
+	num *= 10;
+	char SUFFIXES[] = {'K', 'M', 'B'};
+	int suff_idx = -1;
+	while(num >= 10000) {
+	  num /= 1000;
+		suff_idx++;
+	}
+	int int_part = num/10;
+	int dec_part = num%10;
+	std::string s = std::to_string(int_part);
+	if (dec_part && (s.length() < 3)) {
+	  s += "." + std::to_string(dec_part);
+  }
+	if (suff_idx >= 0) {
+	  s += std::string(" ") + SUFFIXES[suff_idx];
+  }
+	return s;
+}
+</p></details><br/>
+
+<br/>
