@@ -128,4 +128,60 @@ std::string join_strings(const std::vector<std::string> &input_vector, const std
 ```
 </p></details><br/>
 
+<br/>
 
+<details>
+  <summary><b>Timer</b></summary><p>
+  
+```c++
+#include <chrono>
+
+class Timer {
+
+  private:
+  std::chrono::system_clock::time_point start_time_point;
+  std::chrono::system_clock::time_point end_time_point;
+  float prev_duration;
+  int running = 0;
+
+  public:
+  Timer() {
+    start_time_point = std::chrono::system_clock::now();
+    end_time_point = std::chrono::system_clock::now();
+    prev_duration = 0;
+    running = 1;
+  }
+
+  void start() {
+    start_time_point = std::chrono::system_clock::now();
+    prev_duration = 0;
+    running = 1;
+  }
+
+  void stop() {
+    end_time_point = std::chrono::system_clock::now();
+    std::chrono::duration<float> dur = end_time_point - start_time_point;
+    prev_duration += dur.count();
+    running = 0;
+  }
+
+  /* resume(): restart timer without resetting the total duration */
+  void resume() {
+    start_time_point = std::chrono::system_clock::now();
+    running = 1;
+  }
+
+  float get_seconds() {
+    if (running) {
+      std::chrono::duration<float> dur =
+                std::chrono::system_clock::now() - start_time_point;
+      return dur.count() + prev_duration;
+    }
+    return prev_duration;
+  }
+
+};
+```
+</p></details><br/>
+
+<br/>
