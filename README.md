@@ -1,4 +1,4 @@
-# C++ String Utility Functions
+# C++ Miscellanious Utility Functions
 
 <br/>
 
