@@ -47,6 +47,25 @@ std::ostream& operator<<(std::ostream& os, ValueIndexPair p) {
 <br/>
 
 <details>
+  <summary><b>Random Number Generation</b></summary><p>
+  
+```c++
+#include <functional>
+#include <random>
+
+void RngDemo() {
+  std::default_random_engine engine;
+  std::uniform_int_distribution<int> distribution(0, 100);
+  std::function<int()> rng = std::bind(distribution, engine);
+  // Now call rng() whenever we need a random value
+  int random_value = rng();
+}
+```
+</p></details><br/>
+
+<br/>
+
+<details>
   <summary><b>Vector to String</b></summary><p>
   
 ```c++
