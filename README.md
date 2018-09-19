@@ -19,6 +19,7 @@ std::ostream& operator<<(std::ostream& os, std::vector<T> v) {
     os << v[v.size() - 1] << " ";
   }
   os << "]";
+  return os;
 }
 ```
 </p></details><br/>
