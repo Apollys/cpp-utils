@@ -3,6 +3,29 @@
 <br/>
 
 <details>
+  <summary><b>Vector Ostream Operator <<</b></summary><p>
+  
+```c++
+#include <ostream>
+#include <vector>
+
+template <typename T>
+std::ostream& operator<<(std::ostream& os, std::vector<T> v) {
+  os << "[ ";
+  for (size_t i = 0; i + 1 < v.size(); i++) {
+    os << v[i] << ", ";
+  }
+  if (v.size() > 0) {
+    os << v[v.size() - 1] << " ";
+  }
+  os << "]";
+}
+```
+</p></details><br/>
+
+<br/>
+
+<details>
   <summary><b>Vector to String</b></summary><p>
   
 ```c++
