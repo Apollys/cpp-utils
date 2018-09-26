@@ -10,7 +10,7 @@
 #include <vector>
 
 template <typename T>
-std::ostream& operator<<(std::ostream& os, std::vector<T> v) {
+std::ostream& operator<<(std::ostream& os, const std::vector<T> v) {
   os << "[ ";
   for (size_t i = 0; i + 1 < v.size(); i++) {
     os << v[i] << ", ";
@@ -37,7 +37,7 @@ struct ValueIndexPair {
   int index = -1;
 };
 
-std::ostream& operator<<(std::ostream& os, ValueIndexPair p) {
+std::ostream& operator<<(std::ostream& os, const ValueIndexPair p) {
   os << "(" << p.value << ", " << p.index << ")";
   return os;
 }
