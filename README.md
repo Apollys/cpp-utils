@@ -27,6 +27,27 @@ std::ostream& operator<<(std::ostream& os, const std::vector<T> v) {
 <br/>
 
 <details>
+  <summary><b>Deque ostream operator<<</b></summary><p>
+  
+```c++
+#include <ostream>
+#include <deque>
+
+template <typename T>
+std::ostream& operator<<(std::ostream& os, const std::deque<T> q) {
+  os << "[ ";
+  for (T el : q) {
+    os << el << " ";
+  }
+  os << "]";
+  return os;
+}
+```
+</p></details><br/>
+
+<br/>
+
+<details>
   <summary><b>Simple Struct with ostream operator<<</b></summary><p>
   
 ```c++
