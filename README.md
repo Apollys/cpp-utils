@@ -10,7 +10,7 @@
 #include <vector>
 
 template <typename T>
-std::ostream& operator<<(std::ostream& os, const std::vector<T> v) {
+std::ostream& operator<<(std::ostream& os, const std::vector<T>& v) {
   os << "[ ";
   for (size_t i = 0; i + 1 < v.size(); i++) {
     os << v[i] << ", ";
@@ -27,6 +27,32 @@ std::ostream& operator<<(std::ostream& os, const std::vector<T> v) {
 <br/>
 
 <details>
+  <summary><b>Unordered Map ostream operator<<</b></summary><p>
+  
+```c++
+#include <ostream>
+#include <unordered_map>
+
+template <typename K, typename V>
+std::ostream& operator<<(std::ostream& os, const std::unordered_map<K, V>& map) {
+  os << "{ ";
+  size_t count = 0;
+  for (const std::pair<K, V>& item : map) {
+    os << item.first << ": " << item.second;
+    if (count + 1 < map.size()) {
+      os << ", ";
+    }
+    ++count;
+  }
+  os << " }";
+  return os;
+}
+```
+</p></details><br/>
+
+<br/>
+
+<details>
   <summary><b>Deque ostream operator<<</b></summary><p>
   
 ```c++
@@ -34,7 +60,7 @@ std::ostream& operator<<(std::ostream& os, const std::vector<T> v) {
 #include <deque>
 
 template <typename T>
-std::ostream& operator<<(std::ostream& os, const std::deque<T> q) {
+std::ostream& operator<<(std::ostream& os, const std::deque<T>& q) {
   os << "[ ";
   for (T el : q) {
     os << el << " ";
