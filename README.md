@@ -163,6 +163,21 @@ void RngDemo() {
 <br/>
 
 <details>
+  <summary><b>Time Seed</b></summary><p>
+  
+```c++
+#include <chrono>
+
+int TimeSeed() {
+  auto current_time = std::chrono::high_resolution_clock::now().time_since_epoch();
+  return std::chrono::duration_cast<std::chrono::nanoseconds>(current_time).count();
+}
+```
+</p></details><br/>
+
+<br/>
+
+<details>
   <summary><b>Vector to String</b></summary><p>
   
 ```c++
