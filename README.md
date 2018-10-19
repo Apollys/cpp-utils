@@ -53,7 +53,7 @@ std::ostream& operator<<(std::ostream& os, const std::unordered_map<K, V>& map) 
 <br/>
 
 <details>
-  <summary><b>Trimming Whitespace from Strings</b></summary><p>
+  <summary><b>Trim Whitespace from String</b></summary><p>
   
 ```c++
 #include <algorithm> 
