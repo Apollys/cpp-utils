@@ -50,6 +50,8 @@ std::ostream& operator<<(std::ostream& os, const std::unordered_map<K, V>& map) 
 ```
 </p></details><br/>
 
+<br/>
+
 <details>
   <summary><b>Trimming Whitespace<<</b></summary><p>
   
@@ -97,8 +99,6 @@ static inline std::string trim_copy(std::string s) {
 }
 ```
 </p></details><br/>
-
-<br/>
 
 <br/>
 
