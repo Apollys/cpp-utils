@@ -68,7 +68,7 @@ class Timer {
     running = 1;
   }
 
-  float get_seconds() {
+  float getSeconds() {
     if (running) {
       std::chrono::duration<float> dur =
                 std::chrono::system_clock::now() - start_time_point;
