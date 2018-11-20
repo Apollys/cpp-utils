@@ -236,7 +236,7 @@ int CurrentTimeNano() {
 #include <string>
 #include <cstdlib>
 
-std::string format_number(int num) {
+std::string FormatNumber(int num) {
 	// First multiply by 10 to get one decimal place
 	num *= 10;
 	char SUFFIXES[] = {'K', 'M', 'B'};
@@ -256,6 +256,7 @@ std::string format_number(int num) {
   }
 	return s;
 }
+```
 </p></details><br/>
 
 <br/>
