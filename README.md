@@ -1,4 +1,4 @@
-# C++ Miscellanious Utility Functions
+# C++ Utility Functions
 
 <br/>
 
@@ -19,6 +19,26 @@ std::ostream& operator<<(std::ostream& os, const std::vector<T>& v) {
     }
   }
   os << " ]";
+  return os;
+}
+```
+</p></details><br/>
+
+<br/>
+
+<details>
+  <summary><b>Simple struct with ostream operator<<</b></summary><p>
+  
+```c++
+#include <ostream>
+
+struct ValueIndexPair {
+  int value = -1;
+  int index = -1;
+};
+
+std::ostream& operator<<(std::ostream& os, const ValueIndexPair p) {
+  os << "(" << p.value << ", " << p.index << ")";
   return os;
 }
 ```
@@ -84,33 +104,7 @@ class Timer {
 <br/>
 
 <details>
-  <summary><b>Unordered Map ostream operator<<</b></summary><p>
-  
-```c++
-#include <ostream>
-#include <unordered_map>
-
-template <typename K, typename V>
-std::ostream& operator<<(std::ostream& os, const std::unordered_map<K, V>& map) {
-  os << "{ ";
-  size_t count = 0;
-  for (const std::pair<K, V>& item : map) {
-    os << item.first << ": " << item.second;
-    if (count + 1 < map.size()) {
-      os << ", ";
-    }
-    ++count;
-  }
-  os << " }";
-  return os;
-}
-```
-</p></details><br/>
-
-<br/>
-
-<details>
-  <summary><b>Trim Whitespace from String</b></summary><p>
+  <summary><b>String whitespace trim</b></summary><p>
   
 ```c++
 #include <algorithm> 
@@ -160,82 +154,7 @@ static inline std::string trim_copy(std::string s) {
 <br/>
 
 <details>
-  <summary><b>Deque ostream operator<<</b></summary><p>
-  
-```c++
-#include <ostream>
-#include <deque>
-
-template <typename T>
-std::ostream& operator<<(std::ostream& os, const std::deque<T>& q) {
-  os << "[ ";
-  for (T el : q) {
-    os << el << " ";
-  }
-  os << "]";
-  return os;
-}
-```
-</p></details><br/>
-
-<br/>
-
-<details>
-  <summary><b>Simple Struct with ostream operator<<</b></summary><p>
-  
-```c++
-#include <ostream>
-
-struct ValueIndexPair {
-  int value = -1;
-  int index = -1;
-};
-
-std::ostream& operator<<(std::ostream& os, const ValueIndexPair p) {
-  os << "(" << p.value << ", " << p.index << ")";
-  return os;
-}
-```
-</p></details><br/>
-
-<br/>
-
-<details>
-  <summary><b>Random Number Generation</b></summary><p>
-  
-```c++
-#include <functional>
-#include <random>
-
-void RngDemo() {
-  std::default_random_engine engine;
-  std::uniform_int_distribution<int> distribution(0, 100);
-  std::function<int()> rng = std::bind(distribution, engine);
-  // Now call rng() whenever we need a random value
-  int random_value = rng();
-}
-```
-</p></details><br/>
-
-<br/>
-
-<details>
-  <summary><b>Time Seed</b></summary><p>
-  
-```c++
-#include <chrono>
-
-int TimeSeed() {
-  auto current_time = std::chrono::high_resolution_clock::now().time_since_epoch();
-  return std::chrono::duration_cast<std::chrono::nanoseconds>(current_time).count();
-}
-```
-</p></details><br/>
-
-<br/>
-
-<details>
-  <summary><b>Split String</b></summary><p>
+  <summary><b>String split</b></summary><p>
   
 ```c++
 #include <string>
@@ -296,7 +215,22 @@ std::string join_strings(const std::vector<std::string> &input_vector, const std
 <br/>
 
 <details>
-  <summary><b>Human-Readable Number Formatting</b></summary><p>
+  <summary><b>Time Seed</b></summary><p>
+  
+```c++
+#include <chrono>
+
+int CurrentTimeNano() {
+  auto current_time = std::chrono::high_resolution_clock::now().time_since_epoch();
+  return std::chrono::duration_cast<std::chrono::nanoseconds>(current_time).count();
+}
+```
+</p></details><br/>
+
+<br/>
+
+<details>
+  <summary><b>Human-readable number formatting</b></summary><p>
   
 ```c++
 #include <string>
