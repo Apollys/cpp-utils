@@ -134,49 +134,49 @@ IntType SimpleIntRng(IntType min_value, IntType max_value) {
 <br/>
 
 <details>
-  <summary><b>String whitespace trim</b></summary><p>
+  <summary><b>String trim</b></summary><p>
   
 ```c++
-#include <algorithm> 
-#include <cctype>
+#include <algorithm> // std::find_if
+#include <cctype> // std::isspace
 #include <string>
 
-// trim from start (in place)
-static inline void ltrim(std::string &s) {
-    s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](int ch) {
-        return !std::isspace(ch);
-    }));
+// Trim from left, in-place
+static inline void Ltrim(std::string &s) {
+  s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](int ch) {
+    return !std::isspace(ch);
+  }));
 }
 
-// trim from end (in place)
-static inline void rtrim(std::string &s) {
-    s.erase(std::find_if(s.rbegin(), s.rend(), [](int ch) {
-        return !std::isspace(ch);
-    }).base(), s.end());
+// Trim from right, in-place
+static inline void Rtrim(std::string &s) {
+  s.erase(std::find_if(s.rbegin(), s.rend(), [](int ch) {
+    return !std::isspace(ch);
+  }).base(), s.end());  // .base() gets forward iterator from reverse
 }
 
-// trim from both ends (in place)
-static inline void trim(std::string &s) {
-    ltrim(s);
-    rtrim(s);
+// Trim from both sides, in-place
+static inline void Trim(std::string &s) {
+    Ltrim(s);
+    Rtrim(s);
 }
 
-// trim from start (copying)
-static inline std::string ltrim_copy(std::string s) {
-    ltrim(s);
-    return s;
+// Trim from left, makes copy
+static inline std::string LtrimCopy(std::string s) {
+  Ltrim(s);
+  return s;
 }
 
-// trim from end (copying)
-static inline std::string rtrim_copy(std::string s) {
-    rtrim(s);
-    return s;
+// Trim from right, makes copy
+static inline std::string RtrimCopy(std::string s) {
+  Rtrim(s);
+  return s;
 }
 
-// trim from both ends (copying)
-static inline std::string trim_copy(std::string s) {
-    trim(s);
-    return s;
+// Trim from both sides, makes copy
+static inline std::string TrimCopy(std::string s) {
+  Trim(s);
+  return s;
 }
 ```
 </p></details><br/>
