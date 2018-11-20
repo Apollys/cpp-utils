@@ -53,51 +53,81 @@ std::ostream& operator<<(std::ostream& os, const ValueIndexPair p) {
 #include <chrono>
 
 class Timer {
+  using high_res_clock = std::chrono::high_resolution_clock;
 
   private:
-  std::chrono::system_clock::time_point start_time_point;
-  std::chrono::system_clock::time_point end_time_point;
-  float prev_duration;
-  int running = 0;
+  high_res_clock::time_point start_time_point_;
+  high_res_clock::time_point end_time_point_;
+  double prev_duration_;
+  bool running_;
+
+  double ComputeDuration(high_res_clock::time_point start, high_res_clock::time_point end) {
+    using DurationType = std::chrono::duration<double>;
+    DurationType dur = std::chrono::duration_cast<DurationType>(end - start);
+    return dur.count();
+  }
 
   public:
-  Timer() {
-    start_time_point = std::chrono::system_clock::now();
-    end_time_point = std::chrono::system_clock::now();
-    prev_duration = 0;
-    running = 1;
+  Timer() : prev_duration_(0), running_(true) {
+    start_time_point_ = high_res_clock::now();
+    end_time_point_ = high_res_clock::now();
   }
 
   // Resets and starts timer
-  void reset() {
-    start_time_point = std::chrono::system_clock::now();
-    prev_duration = 0;
-    running = 1;
+  void Reset() {
+    start_time_point_ = high_res_clock::now();
+    prev_duration_ = 0;
+    running_ = true;
   }
 
-  void pause() {
-    end_time_point = std::chrono::system_clock::now();
-    std::chrono::duration<float> dur = end_time_point - start_time_point;
-    prev_duration += dur.count();
-    running = 0;
+  void Pause() {
+    end_time_point_ = high_res_clock::now();
+    prev_duration_ += ComputeDuration(start_time_point_, end_time_point_);
+    running_ = false;
   }
 
   // Restarts timer without resetting the total duration
-  void resume() {
-    start_time_point = std::chrono::system_clock::now();
-    running = 1;
+  void Resume() {
+    start_time_point_ = high_res_clock::now();
+    running_ = true;
   }
 
-  float getSeconds() {
-    if (running) {
-      std::chrono::duration<float> dur =
-                std::chrono::system_clock::now() - start_time_point;
-      return dur.count() + prev_duration;
+  double GetSeconds() {
+    if (running_) {
+      return prev_duration_ + ComputeDuration(start_time_point_, high_res_clock::now());
     }
-    return prev_duration;
+    return prev_duration_;
   }
 
 };
+```
+</p></details><br/>
+
+<br/>
+
+<details>
+  <summary><b>Simple integer RNG</b></summary><p>
+  
+```c++
+#include <chrono>
+#include <random>
+
+namespace rng {
+
+int CurrentTimeNano() {
+  auto current_time = std::chrono::high_resolution_clock::now().time_since_epoch();
+  return std::chrono::duration_cast<std::chrono::nanoseconds>(current_time).count();
+}
+
+template <typename IntType>
+IntType SimpleIntRng(IntType min_value, IntType max_value) {
+  static_assert(std::is_integral<IntType>::value, "Parameters must be of integral type");
+  static std::default_random_engine engine(CurrentTimeNano());
+  std::uniform_int_distribution<int> distribution(min_value, max_value);
+  return distribution(engine);
+}
+  
+} // namespace rng
 ```
 </p></details><br/>
 
@@ -193,7 +223,7 @@ void split_string(std::string input_string, const char delim,
 <br/>
 
 <details>
-  <summary><b>Join String</b></summary><p>
+  <summary><b>String join</b></summary><p>
   
 ```c++
 #include <vector>
