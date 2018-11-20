@@ -263,21 +263,6 @@ std::string JoinStrings(const std::vector<std::string>& input_vector, const std:
 <br/>
 
 <details>
-  <summary><b>Time Seed</b></summary><p>
-  
-```c++
-#include <chrono>
-
-int CurrentTimeNano() {
-  auto current_time = std::chrono::high_resolution_clock::now().time_since_epoch();
-  return std::chrono::duration_cast<std::chrono::nanoseconds>(current_time).count();
-}
-```
-</p></details><br/>
-
-<br/>
-
-<details>
   <summary><b>Human-readable number formatting</b></summary><p>
   
 ```c++
