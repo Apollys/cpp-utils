@@ -18,8 +18,6 @@ std::ostream& operator<<(std::ostream& os, const ValueIndexPair p) {
 
 <br/>
 
-
-
 <details>
   <summary><b>Vector ostream operator<<</b></summary><p>
   
@@ -37,6 +35,29 @@ std::ostream& operator<<(std::ostream& os, const std::vector<T>& v) {
     }
   }
   os << " ]";
+  return os;
+}
+```
+</p></details><br/>
+
+<br/>
+
+<details>
+  <summary><b>String vector ostream operator<<</b></summary><p>
+  
+```c++
+#include <ostream>
+#include <vector>
+
+std::ostream& operator<<(std::ostream& os, const std::vector<std::string> v) {
+  os << "[";
+  for (size_t i = 0; i < v.size(); ++i) {
+    os << "\"" << v[i] << "\"";
+    if (i + 1 < v.size()) {
+      os << ", ";
+    }
+  }
+  os << "]";
   return os;
 }
 ```
