@@ -234,13 +234,26 @@ std::vector<std::string> SplitString(std::string input_string, const char delim,
 #include <vector>
 #include <string>
 
-std::string join_strings(const std::vector<std::string> &input_vector, const std::string delim) {
-  std::string result = "";
-  for (unsigned int i = 0; i + 1 < input_vector.size(); i++) {
-    result += input_vector[i] + delim;
+// Delimiter as char
+std::string JoinStrings(const std::vector<std::string>& input_vector, const char delim) {
+  std::string result("");
+  for (unsigned int i = 0; i < input_vector.size(); i++) {
+    result += input_vector[i];
+    if (i + 1 < input_vector.size()) {
+      result += delim;
+    }
   }
-  if (input_vector.size() > 0) {
-    result += input_vector[input_vector.size() - 1];
+  return result;
+}
+
+// Delimiter as string
+std::string JoinStrings(const std::vector<std::string>& input_vector, const std::string& delim) {
+  std::string result("");
+  for (unsigned int i = 0; i < input_vector.size(); i++) {
+    result += input_vector[i];
+    if (i + 1 < input_vector.size()) {
+      result += delim;
+    }
   }
   return result;
 }
