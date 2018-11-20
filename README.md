@@ -21,6 +21,19 @@ std::ostream& operator<<(std::ostream& os, const std::vector<T>& v) {
   os << (v.size() ? "]" : " ]");
   return os;
 }
+
+// Specialization for vector of strings
+std::ostream& operator<<(std::ostream& os, const std::vector<std::string> v) {
+  os << "[";
+  for (size_t i = 0; i < v.size(); ++i) {
+    os << "\"" << v[i] << "\"";
+    if (i + 1 < v.size()) {
+      os << ", ";
+    }
+  }
+  os << "]";
+  return os;
+}
 ```
 </p></details><br/>
 
@@ -188,34 +201,26 @@ static inline std::string TrimCopy(std::string s) {
   
 ```c++
 #include <string>
-#include <algorithm> // std::unique
-#include <functional> // std::function
+#include <vector>
 
-void split_string(std::string input_string, const char delim,
-                  std::vector<std::string> &results, bool retain_empty = false) {
-  // Remove consecutive groups of delim characters
-  if (!retain_empty) {
-    std::function<bool(const char &, const char &)> cmp_func = 
-                [&delim] (const char &a, const char &b) { return (a == b) && (a == delim); };
-    std::string::iterator new_end = std::unique(input_string.begin(), input_string.end(), cmp_func);
-    input_string.erase(new_end, input_string.end());
-  }
-  // split into a vector
-  results.clear();
+std::vector<std::string> SplitString(std::string input_string, const char delim,
+                                     bool retain_empty = false) {
+  std::vector<std::string> results;
   size_t start_i = 0;
-  size_t found_i;
-  bool done = false;
-  while (!done) {
+  size_t found_i = 0; // dummy initialization to start while loop
+  size_t len;
+  while (found_i != std::string::npos) {
     found_i = input_string.find(delim, start_i);
-    if (found_i != std::string::npos) {
+    len = (found_i == std::string::npos) ? input_string.length() - start_i : found_i - start_i;
+    if (len > 0) { // non-consecutive delimiters
       results.push_back(input_string.substr(start_i, found_i - start_i));
-      start_i = found_i + 1;
     }
-    else {
-      results.push_back(input_string.substr(start_i, std::string::npos));
-      done = true;
+    else if (retain_empty) {
+      results.push_back(std::string(""));
     }
+    start_i = found_i + 1;
   }
+  return results;
 }
 ```
 </p></details><br/>
