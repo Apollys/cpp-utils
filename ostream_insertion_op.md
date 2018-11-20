@@ -1,4 +1,26 @@
 <details>
+  <summary><b>Simple struct with ostream operator<<</b></summary><p>
+  
+```c++
+#include <ostream>
+
+struct ValueIndexPair {
+  int value = -1;
+  int index = -1;
+};
+
+std::ostream& operator<<(std::ostream& os, const ValueIndexPair p) {
+  os << "(" << p.value << ", " << p.index << ")";
+  return os;
+}
+```
+</p></details><br/>
+
+<br/>
+
+
+
+<details>
   <summary><b>Vector ostream operator<<</b></summary><p>
   
 ```c++
