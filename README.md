@@ -321,12 +321,10 @@ BaseType IntPower(BaseType base, ExpType exponent) {
   return result;
 }
 
-// Value must be float type, precision must be int type
-template <typename ValueType, typename PrecisionType>
-ValueType RoundToPrecision(ValueType value, PrecisionType precision) {
-  static_assert(std::is_floating_point<ValueType>::value, "Float type required for value");
-  static_assert(std::is_integral<PrecisionType>::value, "Integral type required for precision");
-  ValueType scale_factor = static_cast<ValueType>(IntPower(10, precision));
+template <typename FloatType>
+FloatType RoundToPrecision(FloatType value, int precision) {
+  static_assert(std::is_floating_point<FloatType>::value, "Float type required for value");
+  FloatType scale_factor = static_cast<FloatType>(IntPower(10, precision));
   return std::round(value * scale_factor) / scale_factor;
 }
 ```
