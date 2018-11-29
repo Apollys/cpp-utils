@@ -133,7 +133,7 @@ int CurrentTimeNano() {
 }
 
 template <typename IntType>
-IntType SimpleIntRng(IntType min_value, IntType max_value) {
+IntType UniformIntRng(IntType min_value, IntType max_value) {
   static_assert(std::is_integral<IntType>::value, "Parameters must be of integral type");
   static std::default_random_engine engine(CurrentTimeNano());
   std::uniform_int_distribution<int> distribution(min_value, max_value);
