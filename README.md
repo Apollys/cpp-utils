@@ -6,7 +6,11 @@
   <summary><b>Vector ostream operator<<</b></summary><p>
   
 ```c++
+#ifndef VECTOR_OSTREAM_HPP
+#define VECTOR_OSTREAM_HPP
+
 #include <ostream>
+#include <string>
 #include <vector>
 
 template <typename T>
@@ -23,7 +27,7 @@ std::ostream& operator<<(std::ostream& os, const std::vector<T>& v) {
 }
 
 // Specialization for vector of strings
-std::ostream& operator<<(std::ostream& os, const std::vector<std::string> v) {
+std::ostream& operator<<(std::ostream& os, const std::vector<std::string>& v) {
   os << "[";
   for (size_t i = 0; i < v.size(); ++i) {
     os << "\"" << v[i] << "\"";
@@ -34,6 +38,9 @@ std::ostream& operator<<(std::ostream& os, const std::vector<std::string> v) {
   os << "]";
   return os;
 }
+
+#endif  // VECTOR_OSTREAM_HPP
+
 ```
 </p></details><br/>
 
@@ -50,7 +57,7 @@ struct ValueIndexPair {
   int index = -1;
 };
 
-std::ostream& operator<<(std::ostream& os, const ValueIndexPair p) {
+std::ostream& operator<<(std::ostream& os, const ValueIndexPair& p) {
   os << "(" << p.value << ", " << p.index << ")";
   return os;
 }
@@ -63,12 +70,15 @@ std::ostream& operator<<(std::ostream& os, const ValueIndexPair p) {
   <summary><b>Timer</b></summary><p>
   
 ```c++
+#ifndef TIMER_HPP
+#define TIMER_HPP
+
 #include <chrono>
 
 class Timer {
   using high_res_clock = std::chrono::high_resolution_clock;
 
-  private:
+ private:
   high_res_clock::time_point start_time_point_;
   high_res_clock::time_point end_time_point_;
   double prev_duration_;
@@ -80,17 +90,16 @@ class Timer {
     return dur.count();
   }
 
-  public:
-  Timer() : prev_duration_(0), running_(true) {
-    start_time_point_ = high_res_clock::now();
-    end_time_point_ = high_res_clock::now();
-  }
+ public:
+  Timer() : prev_duration_(0), 
+            running_(true),
+            start_time_point_(high_res_clock::now()) {}
 
   // Resets and starts timer
   void Reset() {
-    start_time_point_ = high_res_clock::now();
     prev_duration_ = 0;
     running_ = true;
+    start_time_point_ = high_res_clock::now();
   }
 
   void Pause() {
@@ -101,8 +110,8 @@ class Timer {
 
   // Restarts timer without resetting the total duration
   void Resume() {
-    start_time_point_ = high_res_clock::now();
     running_ = true;
+    start_time_point_ = high_res_clock::now();
   }
 
   double GetSeconds() {
@@ -113,6 +122,9 @@ class Timer {
   }
 
 };
+
+#endif  // TIMER_HPP
+
 ```
 </p></details><br/>
 
@@ -122,6 +134,9 @@ class Timer {
   <summary><b>RNG</b></summary><p>
   
 ```c++
+#ifndef RNG_HPP
+#define RNG_HPP
+
 #include <chrono>
 #include <random>
 
@@ -217,6 +232,9 @@ class NormalIntRng {
     return static_cast<IntType>(distribution_(engine_) + 0.5);
   }
 };
+
+#endif  // RNG_HPP
+
 ```
 </p></details><br/>
 
