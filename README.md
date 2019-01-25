@@ -47,6 +47,25 @@ std::ostream& operator<<(std::ostream& os, const std::vector<std::string>& v) {
 <br/>
 
 <details>
+  <summary><b>Generate random vector</b></summary><p>
+  
+```c++
+#include "rng.hpp"
+
+std::vector<int> GenerateRandomVector(size_t size, int min_value, int max_value) {
+  UniformIntRng<int> rng(min_value, max_value);
+  std::vector<int> generated_vector(size);
+  for (size_t i = 0; i < size; ++i) {
+    generated_vector[i] = rng.GenerateValue();
+  }
+  return generated_vector;
+}
+```
+</p></details><br/>
+
+<br/>
+
+<details>
   <summary><b>Simple struct with ostream operator<<</b></summary><p>
   
 ```c++
