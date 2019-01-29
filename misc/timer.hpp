@@ -7,10 +7,10 @@ class Timer {
   using high_res_clock = std::chrono::high_resolution_clock;
 
  private:
-  high_res_clock::time_point start_time_point_;
-  high_res_clock::time_point end_time_point_;
   double prev_duration_;
   bool running_;
+  high_res_clock::time_point start_time_point_;
+  high_res_clock::time_point end_time_point_;
 
   double ComputeDuration(high_res_clock::time_point start, high_res_clock::time_point end) {
     using DurationType = std::chrono::duration<double>;
