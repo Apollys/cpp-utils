@@ -1,3 +1,6 @@
+#ifndef RNG_HPP
+#define RNG_HPP
+
 #include <chrono>
 #include <random>
 
@@ -94,3 +97,21 @@ class NormalIntRng {
   }
 };
 
+class BernoulliRng {
+ private:
+  double true_probability_;
+  std::default_random_engine engine_;
+  std::uniform_real_distribution<double> distribution_;
+
+ public:
+  BernoulliRng(double true_probability) : true_probability_(true_probability) {
+    engine_ = std::default_random_engine(rng_util::CurrentTimeNano());
+    distribution_ = std::uniform_real_distribution<double>(0, 1);
+  }
+  
+  double GenerateValue() {
+    return distribution_(engine_) < true_probability_;
+  }
+};
+
+#endif  // RNG_HPP
