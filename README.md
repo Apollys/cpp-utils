@@ -88,6 +88,8 @@ std::ostream& operator<<(std::ostream& os, const ValueIndexPair& p) {
 <details>
   <summary><b>Timer</b></summary><p>
   
+  [Raw code](https://raw.githubusercontent.com/Apollys/cpp-utils/master/misc/timer.hpp)
+  
 ```c++
 #ifndef TIMER_HPP
 #define TIMER_HPP
@@ -98,10 +100,10 @@ class Timer {
   using high_res_clock = std::chrono::high_resolution_clock;
 
  private:
-  high_res_clock::time_point start_time_point_;
-  high_res_clock::time_point end_time_point_;
   double prev_duration_;
   bool running_;
+  high_res_clock::time_point start_time_point_;
+  high_res_clock::time_point end_time_point_;
 
   double ComputeDuration(high_res_clock::time_point start, high_res_clock::time_point end) {
     using DurationType = std::chrono::duration<double>;
@@ -151,6 +153,8 @@ class Timer {
 
 <details>
   <summary><b>RNG</b></summary><p>
+  
+  [Raw code](https://raw.githubusercontent.com/Apollys/cpp-utils/master/misc/rng.hpp)
   
 ```c++
 #ifndef RNG_HPP
@@ -249,6 +253,23 @@ class NormalIntRng {
   
   IntType GenerateValue() {
     return static_cast<IntType>(distribution_(engine_) + 0.5);
+  }
+};
+
+class BernoulliRng {
+ private:
+  double true_probability_;
+  std::default_random_engine engine_;
+  std::uniform_real_distribution<double> distribution_;
+
+ public:
+  BernoulliRng(double true_probability) : true_probability_(true_probability) {
+    engine_ = std::default_random_engine(rng_util::CurrentTimeNano());
+    distribution_ = std::uniform_real_distribution<double>(0, 1);
+  }
+  
+  double GenerateValue() {
+    return distribution_(engine_) < true_probability_;
   }
 };
 
