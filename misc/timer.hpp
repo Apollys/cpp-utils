@@ -1,9 +1,12 @@
+#ifndef TIMER_HPP
+#define TIMER_HPP
+
 #include <chrono>
 
 class Timer {
   using high_res_clock = std::chrono::high_resolution_clock;
 
-  private:
+ private:
   high_res_clock::time_point start_time_point_;
   high_res_clock::time_point end_time_point_;
   double prev_duration_;
@@ -15,17 +18,16 @@ class Timer {
     return dur.count();
   }
 
-  public:
-  Timer() : prev_duration_(0), running_(true) {
-    start_time_point_ = high_res_clock::now();
-    end_time_point_ = high_res_clock::now();
-  }
+ public:
+  Timer() : prev_duration_(0), 
+            running_(true),
+            start_time_point_(high_res_clock::now()) {}
 
   // Resets and starts timer
   void Reset() {
-    start_time_point_ = high_res_clock::now();
     prev_duration_ = 0;
     running_ = true;
+    start_time_point_ = high_res_clock::now();
   }
 
   void Pause() {
@@ -36,8 +38,8 @@ class Timer {
 
   // Restarts timer without resetting the total duration
   void Resume() {
-    start_time_point_ = high_res_clock::now();
     running_ = true;
+    start_time_point_ = high_res_clock::now();
   }
 
   double GetSeconds() {
@@ -48,3 +50,5 @@ class Timer {
   }
 
 };
+
+#endif  // TIMER_HPP
