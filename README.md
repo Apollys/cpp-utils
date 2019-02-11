@@ -81,6 +81,18 @@ std::ostream& operator<<(std::ostream& os, const ValueIndexPair& p) {
   return os;
 }
 ```
+
+```c++
+struct Point {
+  double x;
+  double y;
+};
+
+std::ostream& operator<<(std::ostream& os, const Point& p) {
+  os << "(" << p.x << ", " << p.y << ")";
+  return os;
+}
+```
 </p></details><br/>
 
 <br/>
