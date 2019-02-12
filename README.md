@@ -82,7 +82,11 @@ std::ostream& operator<<(std::ostream& os, const Point& p) {
   <summary><b>Sort vector of pairs</b></summary><p>
   
 ```c++
-// Explicitly declared lmabda types (c++11)
+#include <algorithm>
+#include <utility>
+#include <vector>
+
+// Explicitly declared lambda types (c++11)
 std::sort(pair_vector.begin(), pair_vector.end(),
           [](const std::pair<size_t, double>& left, const std::pair<size_t, double>& right) {
 	    return left.second < right.second;
