@@ -47,25 +47,6 @@ std::ostream& operator<<(std::ostream& os, const std::vector<std::string>& v) {
 <br/>
 
 <details>
-  <summary><b>Generate random vector</b></summary><p>
-  
-```c++
-#include "rng.hpp"
-
-std::vector<int> GenerateRandomVector(size_t size, int min_value, int max_value) {
-  UniformIntRng<int> rng(min_value, max_value);
-  std::vector<int> generated_vector(size);
-  for (size_t i = 0; i < size; ++i) {
-    generated_vector[i] = rng.GenerateValue();
-  }
-  return generated_vector;
-}
-```
-</p></details><br/>
-
-<br/>
-
-<details>
   <summary><b>Simple struct with ostream operator<<</b></summary><p>
   
 ```c++
@@ -91,6 +72,44 @@ struct Point {
 std::ostream& operator<<(std::ostream& os, const Point& p) {
   os << "(" << p.x << ", " << p.y << ")";
   return os;
+}
+```
+</p></details><br/>
+
+<br/>
+
+<details>
+  <summary><b>Sort vector of pairs</b></summary><p>
+  
+```c++
+// Explicitly declared lmabda types (c++11)
+std::sort(pair_vector.begin(), pair_vector.end(),
+          [](const std::pair<size_t, double>& left, const std::pair<size_t, double>& right) {
+	    return left.second < right.second;
+          });
+
+// auto lambda types (c++14)
+std::sort(pair_vector.begin(), pair_vector.end(), [](const auto& left, const auto& right) {
+	    return left.second < right.second;
+          });
+```
+</p></details><br/>
+
+<br/>
+
+<details>
+  <summary><b>Generate random vector</b></summary><p>
+  
+```c++
+#include "rng.hpp"
+
+std::vector<int> GenerateRandomVector(size_t size, int min_value, int max_value) {
+  UniformIntRng<int> rng(min_value, max_value);
+  std::vector<int> generated_vector(size);
+  for (size_t i = 0; i < size; ++i) {
+    generated_vector[i] = rng.GenerateValue();
+  }
+  return generated_vector;
 }
 ```
 </p></details><br/>
