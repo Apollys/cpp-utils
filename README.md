@@ -86,13 +86,13 @@ std::ostream& operator<<(std::ostream& os, const Point& p) {
 #include <utility>
 #include <vector>
 
-// Explicitly declared lambda types (c++11)
+// Using explicitly declared lambda argument types (c++11)
 std::sort(pair_vector.begin(), pair_vector.end(),
           [](const std::pair<size_t, double>& left, const std::pair<size_t, double>& right) {
 	    return left.second < right.second;
           });
 
-// auto lambda types (c++14)
+// Using auto lambda argument types (c++14)
 std::sort(pair_vector.begin(), pair_vector.end(), [](const auto& left, const auto& right) {
 	    return left.second < right.second;
           });
