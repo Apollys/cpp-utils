@@ -102,6 +102,36 @@ std::sort(pair_vector.begin(), pair_vector.end(), [](const auto& left, const aut
 <br/>
 
 <details>
+  <summary><b>Test algorithm correctness (against reference/naive solution)</b></summary><p>
+  
+```c++
+#include "random_vector.hpp"
+#include "rng.hpp"
+
+void RunRandomTests(int num_tests, size_t max_array_size, int max_array_value) {
+  UniformIntRng<size_t> array_size_rng(0, max_array_size);
+  int num_tests_passed = 0;
+  for (int i = 0; i < num_tests; ++i) {
+    // Check 0- and 1-sized vectors on first two iterations
+    size_t num_elements = (i < 2) ? i : array_size_rng.GenerateValue();
+    std::vector<int> test_vector(random_vector::GenerateIntVector(num_elements, 0, max_array_value));
+    int naive_result = NaiveMaxWater(test_vector);
+    int result = MaxWater(test_vector);
+    num_tests_passed += (result == naive_result);
+    if (result != naive_result) {
+      std::cout << "Test failed: " << test_vector << std::endl;
+      std::cout << "Naive result: " << naive_result << std::endl;
+      std::cout << "Other result: " << result << std::endl;
+    }
+  }
+  std::cout << "Tests passed: " << num_tests_passed << " / " << num_tests << std::endl;
+}
+```
+</p></details><br/>
+
+<br/>
+
+<details>
   <summary><b>Generate random vector</b></summary><p>
   
 ```c++
