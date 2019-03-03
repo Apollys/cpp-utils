@@ -29,3 +29,8 @@ int main() {
   return 0;
 }
 ```
+Sample Output:
+
+```bash
+Program compiled using standard: c++14
+```
