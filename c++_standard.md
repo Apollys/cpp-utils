@@ -1,4 +1,6 @@
-## Print C++ Standard
+### Print C++ Standard
+
+<br/>
 
 ```c++
 /* 
@@ -32,7 +34,7 @@ int main() {
 
 <br/>
 
-### Sample Output:
+**Sample Output:**
 
 ```bash
 Program compiled using standard: c++14
