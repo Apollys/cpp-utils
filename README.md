@@ -115,7 +115,7 @@ class Point {
   }
   
   Point(const Point& other) : x_(other.x_), y_(other.y_) {
-    std::cout << "Copy_ constructor" << std::endl;
+    std::cout << "Copy constructor" << std::endl;
   }
   
   Point(Point&& other) : x_(std::move(other.x_)), y_(std::move(other.y_)) {
