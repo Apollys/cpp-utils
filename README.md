@@ -102,6 +102,59 @@ std::sort(pair_vector.begin(), pair_vector.end(), [](const auto& left, const aut
 <br/>
 
 <details>
+  <summary><b>Point test class</b></summary><p>
+  
+```c++
+#include <iostream>
+#include <utility>
+
+class Point {
+ public:
+  Point(int x_, int y_) : x_(x_), y_(y_) {
+    std::cout << "Value constructor" << std::endl;
+  }
+  
+  Point(const Point& other) : x_(other.x_), y_(other.y_) {
+    std::cout << "Copy_ constructor" << std::endl;
+  }
+  
+  Point(Point&& other) : x_(std::move(other.x_)), y_(std::move(other.y_)) {
+    std::cout << "Move constructor" << std::endl;
+  }
+  
+  Point& operator=(Point other) {
+    std::cout << "Assignment operator" << std::endl;
+    swap(*this, other);
+    return *this;
+  }
+  
+  ~Point() {
+    std::cout << "Destructor (" << x_ << ", " << y_ << ")" << std::endl;
+  }
+  
+ private:
+  int x_;
+  int y_;
+  
+  friend void swap(Point& left, Point& right);
+  friend std::ostream& operator<<(std::ostream& os, const Point& p);
+};
+
+void swap(Point& left, Point& right) {
+  std::swap(left.x_, right.x_);
+  std::swap(left.y_, right.y_);
+}
+
+std::ostream& operator<<(std::ostream& os, const Point& p) {
+  os << "(" << p.x_ << ", " << p.y_ << ")";
+  return os;
+}
+```
+</p></details><br/>
+
+<br/>
+
+<details>
   <summary><b>Test algorithm correctness (against reference/naive solution)</b></summary><p>
   
 ```c++
