@@ -107,31 +107,36 @@ std::sort(pair_vector.begin(), pair_vector.end(), [](const auto& left, const aut
 class Thing {
   public:
     Thing(int value) : _value(value) {
-        std::cout << "Constructor" << std::endl;
+        std::cout << "Constructor: " << *this << std::endl;
     }
-    
+
     Thing(const Thing& other) : _value(other._value) {
-        std::cout << "Copy constructor" << std::endl;
+        std::cout << "Copy constructor: " << *this << std::endl;
     }
-    
+
     Thing(Thing&& other) : _value(std::move(other._value)) {
-        std::cout << "Move constructor" << std::endl;
+        std::cout << "Move constructor: " << *this << std::endl;
     }
-    
+
     Thing& operator=(const Thing& other) {
-        std::cout << "Copy assignment" << std::endl;
         _value = other._value;
+        std::cout << "Copy assignment: " << *this << std::endl;
     }
 
     Thing& operator=(Thing&& other) {
-        std::cout << "Move assignment" << std::endl;
+        _value = other._value;
+        std::cout << "Move assignment: " << *this << std::endl;
+    }
+    
+    ~Thing() {
+        std::cout << "Destructor: " << *this << std::endl;
     }
 
-    int GetValue() const;
+    int GetValue() const { return _value; }
 
   private:
     int _value;
-    
+
     friend std::ostream& operator<<(std::ostream& os, const Thing& thing);
 };
 
