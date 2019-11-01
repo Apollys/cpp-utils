@@ -15,15 +15,12 @@
 
 template <typename T>
 std::ostream& operator<<(std::ostream& os, const std::vector<T>& v) {
-  os << "[";
-  for (size_t i = 0; i < v.size(); i++) {
-    os << v[i];
-    if (i + 1 < v.size()) {
-      os << ", ";
+    os << "[";
+    for (const T& el : v) {
+        os << el << ", ";
     }
-  }
-  os << (v.size() ? "]" : " ]");
-  return os;
+    os << (v.size() ? "\b\b]" : " ]");
+    return os;
 }
 
 // Specialization for vector of strings
