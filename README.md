@@ -102,7 +102,53 @@ std::sort(pair_vector.begin(), pair_vector.end(), [](const auto& left, const aut
 <br/>
 
 <details>
-  <summary><b>Point test class</b></summary><p>
+  <summary><b>Simple test class</b></summary><p>
+  
+```c++
+#include <iostream>
+
+class Thing {
+  public:
+    Thing(int value) : _value(value) {
+        std::cout << "Constructor" << std::endl;
+    }
+    
+    Thing(const Thing& other) : _value(other._value) {
+        std::cout << "Copy constructor" << std::endl;
+    }
+    
+    Thing(Thing&& other) : _value(std::move(other._value)) {
+        std::cout << "Move constructor" << std::endl;
+    }
+    
+    Thing& operator=(const Thing& other) {
+        std::cout << "Copy assignment" << std::endl;
+        _value = other._value;
+    }
+
+    Thing& operator=(Thing&& other) {
+        std::cout << "Move assignment" << std::endl;
+    }
+
+    int GetValue() const;
+
+  private:
+    int _value;
+    
+    friend std::ostream& operator<<(std::ostream& os, const Thing& thing);
+};
+
+std::ostream& operator<<(std::ostream& os, const Thing& thing) {
+    os << "Thing(" << thing._value << ")";
+    return os;
+}
+```
+</p></details><br/>
+
+<br/>
+
+<details>
+  <summary><b>Point test class (with copy and swap)</b></summary><p>
   
 ```c++
 #include <iostream>
