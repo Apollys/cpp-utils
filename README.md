@@ -44,6 +44,47 @@ std::ostream& operator<<(std::ostream& os, const std::vector<std::string>& v) {
 <br/>
 
 <details>
+  <summary><b>Generate random vector</b></summary><p>
+
+```c++
+#include <algorithm>
+#include <chrono>
+#include <functional>
+#include <vector>
+
+int CurrentTimeNano() {
+    auto current_time = std::chrono::high_resolution_clock::now().time_since_epoch();
+    return std::chrono::duration_cast<std::chrono::nanoseconds>(current_time).count();
+}
+
+std::vector<int> GenerateRandomVector(size_t size, int min_value, int max_value) {
+    std::default_random_engine engine(CurrentTimeNano());
+    std::uniform_int_distribution<int> distribution(min_value, max_value);
+    std::vector<int> generated_vector;
+    std::generate_n(std::back_inserter(generated_vector), size, std::bind(distribution, engine));
+    return generated_vector;
+}
+```
+
+Or, using the the `rng.hpp` header in this repository:
+
+```c++
+#include "rng.hpp"
+
+std::vector<int> GenerateRandomVector(size_t size, int min_value, int max_value) {
+  UniformIntRng<int> rng(min_value, max_value);
+  std::vector<int> generated_vector(size);
+  for (size_t i = 0; i < size; ++i) {
+    generated_vector[i] = rng.GenerateValue();
+  }
+  return generated_vector;
+}
+```
+</p></details><br/>
+
+<br/>
+
+<details>
   <summary><b>Simple struct with ostream operator<<</b></summary><p>
   
 ```c++
@@ -226,47 +267,6 @@ void RunRandomTests(int num_tests, size_t max_array_size, int max_array_value) {
     }
   }
   std::cout << "Tests passed: " << num_tests_passed << " / " << num_tests << std::endl;
-}
-```
-</p></details><br/>
-
-<br/>
-
-<details>
-  <summary><b>Generate random vector</b></summary><p>
-
-```c++
-#include <algorithm>
-#include <chrono>
-#include <functional>
-#include <vector>
-
-int CurrentTimeNano() {
-    auto current_time = std::chrono::high_resolution_clock::now().time_since_epoch();
-    return std::chrono::duration_cast<std::chrono::nanoseconds>(current_time).count();
-}
-
-std::vector<int> GenerateRandomVector(size_t size, int min_value, int max_value) {
-    std::default_random_engine engine(CurrentTimeNano());
-    std::uniform_int_distribution<int> distribution(min_value, max_value);
-    std::vector<int> generated_vector;
-    std::generate_n(std::back_inserter(generated_vector), size, std::bind(distribution, engine));
-    return generated_vector;
-}
-```
-
-Or, using the the `rng.hpp` header in this repository:
-
-```c++
-#include "rng.hpp"
-
-std::vector<int> GenerateRandomVector(size_t size, int min_value, int max_value) {
-  UniformIntRng<int> rng(min_value, max_value);
-  std::vector<int> generated_vector(size);
-  for (size_t i = 0; i < size; ++i) {
-    generated_vector[i] = rng.GenerateValue();
-  }
-  return generated_vector;
 }
 ```
 </p></details><br/>
