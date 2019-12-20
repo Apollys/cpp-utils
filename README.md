@@ -249,7 +249,6 @@ int CurrentTimeNano() {
 std::vector<int> GenerateRandomVector(size_t size, int min_value, int max_value) {
     std::default_random_engine engine(CurrentTimeNano());
     std::uniform_int_distribution<int> distribution(min_value, max_value);
-    UniformIntRng<int> rng(min_value, max_value);
     std::vector<int> generated_vector;
     std::generate_n(std::back_inserter(generated_vector), size, std::bind(distribution, engine));
     return generated_vector;
