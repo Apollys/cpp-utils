@@ -16,29 +16,30 @@
 template <typename T>
 std::ostream& operator<<(std::ostream& os, const std::vector<T>& v) {
     os << "[";
-    for (const T& el : v) {
-        os << el << ", ";
+    for (size_t i = 0; i < v.size(); ++i) {
+        os << v[i];
+        if (i + 1 < v.size()) os << ", ";
     }
-    os << (v.size() ? "\b\b]" : " ]");
+    os << "]";
     return os;
 }
 
 // Specialization for vector of strings
 std::ostream& operator<<(std::ostream& os, const std::vector<std::string>& v) {
-  os << "[";
-  for (size_t i = 0; i < v.size(); ++i) {
-    os << "\"" << v[i] << "\"";
-    if (i + 1 < v.size()) {
-      os << ", ";
+    os << "[";
+    for (size_t i = 0; i < v.size(); ++i) {
+        os << "\"" << v[i] << "\"";
+        if (i + 1 < v.size()) os << ", ";
     }
-  }
-  os << "]";
-  return os;
+    os << "]";
+    return os;
 }
 
 #endif  // VECTOR_OSTREAM_HPP
 
 ```
+Note: index checking method rather than `\b` deletion at end used becuase `\b` does not work for stringstreams.
+
 </p></details><br/>
 
 <br/>
