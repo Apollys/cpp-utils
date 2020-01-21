@@ -541,7 +541,7 @@ std::string JoinStrings(const std::vector<std::string>& input_vector, const std:
  *
  * Returns: f(t) where f is the line passing through (t_min, f(t_min)), (t_max, f(t_max))
  */
-double lerp(double t_min, double t_max, double t, double f_t_min, double f_t_max) {
+double Lerp(double t_min, double t_max, double t, double f_t_min, double f_t_max) {
     double r = (t - t_min) / (t_max - t_min);
     return (1 - r) * f_t_min + r * f_t_max;
 }
