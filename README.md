@@ -530,6 +530,26 @@ std::string JoinStrings(const std::vector<std::string>& input_vector, const std:
 <br/>
 
 <details>
+  <summary><b>Linear interpolation (lerp)</b></summary><p>
+  
+```c++
+/*
+ * Linear interpolation, given:
+ *  - input variable reference points: [t_min, t_max]
+ *  - target value of input variable: t
+ *  - output values: f(t_min), f(t_max)
+ *
+ * Returns: f(t) where f is the line passing through (t_min, f(t_min)), (t_max, f(t_max))
+ */
+double lerp(double t_min, double t_max, double t, double f_t_min, double f_t_max) {
+    double r = (t - t_min) / (t_max - t_min);
+    return (1 - r) * f_t_min + r * f_t_max;
+}
+</p></details><br/>
+
+<br/>
+
+<details>
   <summary><b>Integer power function</b></summary><p>
   
 ```c++
