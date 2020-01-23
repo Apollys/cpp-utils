@@ -413,6 +413,27 @@ class BernoulliRng {
 <br/>
 
 <details>
+  <summary><b>To fixed width string</b></summary><p>
+  
+```c++
+#include <iomanip>
+#include <sstream>
+#include <string>
+
+// Converts the given value to a string of length at least width by padding on the left with
+// left_padding ('0' if unspecified).  Requires ostream insertion operator for T.
+template <typename T>
+std::string ToFixedWidthString(T value, int width, char left_padding = '0') {
+    std::ostringstream oss;
+    oss << std::setfill(left_padding) << std::setw(width) << value;
+    return oss.str();
+}
+```
+</p></details><br/>
+
+<br/>
+
+<details>
   <summary><b>String trim</b></summary><p>
   
 ```c++
