@@ -157,18 +157,20 @@ class Thing {
     }
 
     Thing(Thing&& other) : _value(std::move(other._value)) {
-        std::cout << "Move constructor: " << *this << std::endl;
+        std::cout << "Move constructor: " << *this << " from " << other << std::endl;
+        other._value = 0;
     }
 
     Thing& operator=(const Thing& other) {
+        std::cout << "Copy assignment: " << *this << " = " << other << std::endl;
         _value = other._value;
-        std::cout << "Copy assignment: " << *this << std::endl;
         return *this;
     }
 
     Thing& operator=(Thing&& other) {
-        _value = other._value;
-        std::cout << "Move assignment: " << *this << std::endl;
+        std::cout << "Move assignment: " << *this << " = " << other << std::endl;
+        _value = std::move(other._value);
+        other._value = 0;
         return *this;
     }
     
