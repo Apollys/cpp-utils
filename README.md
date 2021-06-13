@@ -141,7 +141,7 @@ std::sort(pair_vector.begin(), pair_vector.end(), [](const auto& left, const aut
 <br/>
 
 <details>
-  <summary><b>Simple test class</b></summary><p>
+  <summary><b>Copy/move test class</b></summary><p>
   
 ```c++
 #include <iostream>
@@ -163,11 +163,13 @@ class Thing {
     Thing& operator=(const Thing& other) {
         _value = other._value;
         std::cout << "Copy assignment: " << *this << std::endl;
+        return *this;
     }
 
     Thing& operator=(Thing&& other) {
         _value = other._value;
         std::cout << "Move assignment: " << *this << std::endl;
+        return *this;
     }
     
     ~Thing() {
