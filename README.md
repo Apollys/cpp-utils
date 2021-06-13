@@ -149,7 +149,7 @@ std::sort(pair_vector.begin(), pair_vector.end(), [](const auto& left, const aut
 class Thing {
   public:
     Thing(int value) : _value(value) {
-        std::cout << "Constructor: " << *this << std::endl;
+        std::cout << "Value constructor: " << *this << std::endl;
     }
 
     Thing(const Thing& other) : _value(other._value) {
