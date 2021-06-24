@@ -141,6 +141,25 @@ std::sort(pair_vector.begin(), pair_vector.end(), [](const auto& left, const aut
 <br/>
 
 <details>
+  <summary><b>Move elements of one vector to back of another</b></summary><p>
+  
+```c++
+#include <vector>
+
+// Moves elements of other_vector to the back of primary_vector (in order)
+template <typename T>
+void VectorJoin(std::vector<T>& primary_vector, std::vector<T>& other_vector) {
+    primary_vector.insert(primary_vector.end(),
+                          std::make_move_iterator(other_vector.begin()),
+                          std::make_move_iterator(other_vector.end()));
+    other_vector = {};
+}
+```
+</p></details><br/>
+
+<br/>
+
+<details>
   <summary><b>Copy/move test class</b></summary><p>
   
 ```c++
